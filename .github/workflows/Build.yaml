@@ -56,7 +56,6 @@ jobs:
         run: |
           vcpkg install pybind11
           vcpkg install suitesparse
-          ls /c/vcpkg/installed/x86-windows/bin
 
       - name: Zip vcpkg directories
         if: startsWith(matrix.os, 'windows') # Windows only
