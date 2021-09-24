@@ -41,7 +41,7 @@ jobs:
 #        uses: actions/cache@v2
         if: startsWith(matrix.os, 'windows')  # Windows only
         env:
-          cache-name: cache-vcpkg-suitesparse-pybind11
+          cache-name: cache-vcpkg-suitesparse-pybind11-boost-eigen3
         with:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-rev0
           path: |
@@ -54,6 +54,8 @@ jobs:
         if: startsWith(matrix.os, 'windows')  # Windows only
         # note that suitesparse includes lapack and openblas
         run: |
+          vcpkg install boost
+          vcpkg install eigen3
           vcpkg install pybind11
           vcpkg install suitesparse
 
