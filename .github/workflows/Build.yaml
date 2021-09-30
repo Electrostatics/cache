@@ -22,7 +22,7 @@ jobs:
         os: [windows-latest]
         include:
           - os: windows-latest
-            CMAKE_SYSTEM: win64
+            CMAKE_SYSTEM: win32
             PACKAGE_TYPE: zip
 
     env:
@@ -41,7 +41,7 @@ jobs:
 #        uses: actions/cache@v2
         if: startsWith(matrix.os, 'windows')  # Windows only
         env:
-          cache-name: cache-vcpkg-suitesparse-pybind11-boost-eigen3
+          cache-name: cache-vcpkg-blas-suitesparse-pybind11-boost-eigen3
         with:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-rev0
           path: |
@@ -54,6 +54,7 @@ jobs:
         if: startsWith(matrix.os, 'windows')  # Windows only
         # note that suitesparse includes lapack and openblas
         run: |
+          vcpkg install blas
           vcpkg install boost
           vcpkg install eigen3
           vcpkg install pybind11
